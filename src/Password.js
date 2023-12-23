@@ -15,32 +15,33 @@ export default function Password() {
   const numberArray = "0123456789";
   const symbolArray = "!@#$%^&*()_+=-{}|[]\\:;\"'<>,.?/";
 
- //todo ----- create a string -----
- function createString(){
-    let str = "";
-    if (lowerChar) str += lowerCaseArray;
-    else if (upperChar) str += upperCaseArray;
-    else if (number) str += numberArray;
-    else if (symbol) str += symbolArray;
-    generatePassword(str);
- }
 
- //todo ----- extract password based on string -----
-function generatePassword(str){
-    let password = "";
-    for (let i=0; i < length; i++){
-        password+= str[Math.floor(Math.random() * str.length)];
+
+    //todo ----- create a string -----
+    function createString(){
+        let str = "";
+        if(lowerChar == false && upperChar == false && number == false && symbol == false){
+            alert("Please check atleast one checkbox");
+            return;
+        }
+        if (lowerChar) str += lowerCaseArray;
+        if (upperChar) str += upperCaseArray;
+        if (number) str += numberArray;
+        if (symbol) str += symbolArray;
+        generatePassword(str);
     }
-    console.log(password);
-}
 
-
-
-
+    //todo ----- extract password based on string -----
+    function generatePassword(str){
+        let password = "";
+        for (let i=0; i < length; i++){
+            password+= str[Math.floor(Math.random() * str.length)];
+        }
+        document.getElementById("password").value = password;
+    }
 
   return (
     <div className="container">
-        {console.log(lowerChar, upperChar, number, symbol)}
       <h2>Generate Your Password</h2>
       <div className="lengthContainer">
         <p>
@@ -102,7 +103,13 @@ function generatePassword(str){
             id = "password"
             disabled 
         />
-        <button>Copy</button>
+        <button
+            title="copy to clipboard"
+            onClick= {()=> {
+                navigator.clipboard.writeText(document.getElementById("password").value);
+                alert("Text copied to Clipboard. To access the password use ctrl+v.")
+            }}
+        >Copy</button>
       </div>
     </div>
   );
