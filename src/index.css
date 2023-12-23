@@ -1,13 +1,95 @@
-body {
+*{
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255,254,253);
+background: linear-gradient(133deg, rgba(255,254,253,1) 0%, rgba(25,68,102,1) 0%, rgba(27,74,117,1) 36%, rgba(46,124,237,1) 100%);
+}
+.container{
+  box-shadow: rgba(50, 50, 93) 0px 50px 100px -20px, rgba(0, 0, 0, 1) 0px 30px 60px -30px, rgba(10, 37, 64) 0px -2px 6px 0px inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding:3rem;
+  border-radius: 10px;
+  background-color: aliceblue;
+  color: #132043;
+}
+.container h2{
+  text-decoration: underline;
+}
+.lengthContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.lengthContainer input, .readyPassword input{
+  background-color: #F1B4BB;
+  border: 1px dashed black;
+  outline: none;
+  height: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+.passwordOptions{
+  display: flex;
+  gap: 100px;
+}
+.conditionContainer1 input, .conditionContainer2 input{
+  margin-left: 10px;
+  accent-color: #F1B4BB;
+  cursor: pointer;
+  width: 20px;
+  height: 15px;
+}
+.readyPassword{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+ 
+}
+.readyPassword input{
+  width: 60%;
+  border-right: none;
+}
+.readyPassword button{
+  height: 30px;
+  padding: 0 1rem;
+  font-weight: 700;
+  background-color: #5ca795;
+  border: 1px dashed black;
+  border-left: none;
+  outline: none;
+  cursor: pointer;
+}
+.readyPassword button:hover{
+  background-color: #418574;
+  color: white;
+}
+.ready{
+  padding: 0.7rem 3rem;
+  border-radius: 8px;
+  outline: none;
+  background-color: #5ca795;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  color: white;
+  text-shadow: 0 0 5px rgb(2, 2, 2);
+}
+.ready:hover{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.ready:active{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
 }
