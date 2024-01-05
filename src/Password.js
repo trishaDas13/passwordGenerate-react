@@ -1,26 +1,26 @@
 import "./index.css";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
-export default function Password() {
+const Password = () => {
   //todo ----- Declair state varriable -----
-  let [length, setLength] = useState(8);
+  let [length, setLength] = useState(0);
   let [lowerChar, setLowerChar] = useState(false);
   let [upperChar, setUpperChar] = useState(false);
   let [number, setNumber] = useState(false);
   let [symbol, setSymbol] = useState(false);
+  const passwordRef = useRef(null);
 
-  //todo ----- set arrays for different catagories -----
-  const lowerCaseArray = "abcdefghijklmnopqrstuvwxyz";
-  const upperCaseArray = lowerCaseArray.toUpperCase();
-  const numberArray = "0123456789";
-  const symbolArray = "!@#$%^&*()_+=-{}|[]\\:;\"'<>,.?/";
-
-
+ const generate = useCallback(() => {
+      //todo ----- set arrays for different catagories -----
+      const lowerCaseArray = "abcdefghijklmnopqrstuvwxyz";
+      const upperCaseArray = lowerCaseArray.toUpperCase();
+      const numberArray = "0123456789";
+      const symbolArray = "!@#$%^&*()_+=-{}|[]\\:;\"'<>,.?/";
 
     //todo ----- create a string -----
     function createString(){
         let str = "";
-        if(lowerChar == false && upperChar == false && number == false && symbol == false){
+        if(lowerChar === false && upperChar === false && number === false && symbol === false){
             alert("Please check atleast one checkbox");
             return;
         }
@@ -33,12 +33,27 @@ export default function Password() {
 
     //todo ----- extract password based on string -----
     function generatePassword(str){
+      if(length === ''){
+        alert("Please enter the length of password");
+        return;
+      }
         let password = "";
         for (let i=0; i < length; i++){
             password+= str[Math.floor(Math.random() * str.length)];
         }
         document.getElementById("password").value = password;
     }
+    createString();
+   },[length, lowerChar, number, symbol, upperChar])
+
+   //todo ----- copy the password -----
+   function copyPassword(){
+      if(passwordRef.current){
+        passwordRef.current.select();
+        document.execCommand('copy');
+        alert("Copied to clipboard");
+      }
+   }
 
   return (
     <div className="container">
@@ -95,22 +110,22 @@ export default function Password() {
       </div>
       <button 
         className="ready"
-        onClick = {createString}
+        onClick = {generate}
       >Ready to Generate !</button>
       <div className="readyPassword">
         <input 
             type="text" 
             id = "password"
             disabled 
+            ref = {passwordRef}
         />
         <button
             title="copy to clipboard"
-            onClick= {()=> {
-                navigator.clipboard.writeText(document.getElementById("password").value);
-                alert("Text copied to Clipboard. To access the password use ctrl+v.")
-            }}
+            onClick= {()=> copyPassword()}
         >Copy</button>
       </div>
     </div>
   );
 }
+
+export default Password;
